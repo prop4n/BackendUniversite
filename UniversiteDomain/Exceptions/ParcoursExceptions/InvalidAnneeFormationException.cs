@@ -1,4 +1,4 @@
-namespace UniversiteDomain.Exceptions.EtudiantExceptions;
+namespace UniversiteDomain.Exceptions.ParcoursExceptions;
 
 [Serializable]
 public class InvalidAnneeFormationException : Exception
