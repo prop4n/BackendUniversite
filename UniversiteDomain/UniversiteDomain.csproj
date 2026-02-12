@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
@@ -10,6 +10,9 @@
       <Folder Include="UseCases\EtudiantUseCases\Delete\" />
       <Folder Include="UseCases\EtudiantUseCases\Get\" />
       <Folder Include="UseCases\EtudiantUseCases\Update\" />
+      <Folder Include="UseCases\ParcoursUseCases\Delete\" />
+      <Folder Include="UseCases\ParcoursUseCases\Get\" />
+      <Folder Include="UseCases\ParcoursUseCases\Update\" />
     </ItemGroup>
 
 </Project>
