@@ -6,14 +6,9 @@ using UniversiteDomain.Util;
 
 namespace UniversiteDomain.UseCases.EtudiantUseCases.Create;
 
-public class CreateEtudiantUseCase
+
+public class CreateEtudiantUseCase(IRepositoryFactory repositoryFactory)
 {
-    private readonly IEtudiantRepository _etudiantRepository;
-    
-    public CreateEtudiantUseCase(IRepositoryFactory factory)
-    {
-        _etudiantRepository = factory.EtudiantRepository();
-    }
     
     public async Task<Etudiant> ExecuteAsync(string numEtud, string nom, string prenom, string email)
     {
@@ -24,8 +19,8 @@ public class CreateEtudiantUseCase
     public async Task<Etudiant> ExecuteAsync(Etudiant etudiant)
     {
         await CheckBusinessRules(etudiant);
-        Etudiant et = await _etudiantRepository.CreateAsync(etudiant);
-        await _etudiantRepository.SaveChangesAsync();
+        Etudiant et = await repositoryFactory.EtudiantRepository().CreateAsync(etudiant);
+        await repositoryFactory.EtudiantRepository().SaveChangesAsync();
         return et;
     }
     
@@ -36,7 +31,7 @@ public class CreateEtudiantUseCase
         ArgumentNullException.ThrowIfNull(etudiant.Email);
         
         // On recherche un étudiant avec le même numéro étudiant
-        List<Etudiant> existe = await _etudiantRepository.FindByConditionAsync(e=>e.NumEtud.Equals(etudiant.NumEtud));
+        List<Etudiant> existe = await repositoryFactory.EtudiantRepository().FindByConditionAsync(e=>e.NumEtud.Equals(etudiant.NumEtud));
 
         // Si un étudiant avec le même numéro étudiant existe déjà, on lève une exception personnalisée
         if (existe is {Count:>0}) throw new DuplicateNumEtudException(etudiant.NumEtud+ " - ce numéro d'étudiant est déjà affecté à un étudiant");
@@ -45,7 +40,7 @@ public class CreateEtudiantUseCase
         if (!CheckEmail.IsValidEmail(etudiant.Email)) throw new InvalidEmailException(etudiant.Email + " - Email mal formé");
         
         // On vérifie si l'email est déjà utilisé
-        existe = await _etudiantRepository.FindByConditionAsync(e=>e.Email.Equals(etudiant.Email));
+        existe = await repositoryFactory.EtudiantRepository().FindByConditionAsync(e=>e.Email.Equals(etudiant.Email));
         if (existe is {Count:>0}) throw new DuplicateEmailException(etudiant.Email +" est déjà affecté à un étudiant");
         
         // Le métier définit que les nom doit contenir plus de 3 lettres

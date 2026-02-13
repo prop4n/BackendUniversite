@@ -4,6 +4,7 @@ using UniversiteDomain.DataAdapters.DataAdaptersFactory;
 using UniversiteDomain.Entities;
 using UniversiteDomain.UseCases.ParcoursUseCases.Create;
 using UniversiteDomain.UseCases.ParcoursUseCases.EtudiantDansParcours;
+using UniversiteDomain.UseCases.ParcoursUseCases.UeDansParcours;
 
 namespace UniversiteDomainUnitTests;
 
@@ -58,7 +59,7 @@ public class ParcoursUnitTest
         long idEtudiant = 1;
         long idParcours = 3;
         Etudiant etudiant= new Etudiant { Id = 1, NumEtud = "1", Nom = "nom1", Prenom = "prenom1", Email = "1" };
-        Parcours parcours = new Parcours{Id=3, NomParcours = "Ue 3", AnneeFormation = 1};
+        Parcours parcours = new Parcours{Id=3, NomParcours = "RMI", AnneeFormation = 1};
         
         // On initialise des faux repositories
         var mockEtudiant = new Mock<IEtudiantRepository>();
@@ -73,7 +74,7 @@ public class ParcoursUnitTest
         parcourses.Add(parcours);
         
         List<Parcours> parcoursFinaux = new List<Parcours>();
-        Parcours parcoursFinal = new Parcours{Id=3, NomParcours = "Ue 3", AnneeFormation = 1};
+        Parcours parcoursFinal = new Parcours{Id=3, NomParcours = "RMI", AnneeFormation = 1};
         parcoursFinal.Inscrits.Add(etudiant);
         parcoursFinaux.Add(parcoursFinal);
         
