@@ -9,7 +9,7 @@ namespace UniversiteDomain.UseCases.NoteUseCases.Create;
 
 public class CreateNoteUseCase(IRepositoryFactory repositoryFactory)
 {
-    public async Task<Note> ExecuteAsync(long etudiantId, long ueId, double valeur)
+    public async Task<Note> ExecuteAsync(long etudiantId, long ueId, float valeur)
     {
         await CheckBusinessRules(etudiantId, ueId, valeur);
         return await repositoryFactory.NoteRepository().CreateAsync(

@@ -21,7 +21,7 @@ public class NoteUnitTests
         long idEtudiant = 2;
         long idUe = 3;
         long idParcours = 4;
-        double valeurNote = 15.5;
+        float valeurNote = 15;
         
         Etudiant etudiant = new Etudiant { Id = idEtudiant, NumEtud = "E001", Nom = "Dupont", Prenom = "Jean", Email = "jean@test.fr" };
         Ue ue = new Ue { Id = idUe, NumeroUe = "UE01", Intitule = "Programmation" };

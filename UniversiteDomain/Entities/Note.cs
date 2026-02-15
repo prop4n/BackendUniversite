@@ -9,7 +9,7 @@ public class Note
     public long UeId { get; set; }
     
     // La valeur de la note
-    public double Valeur { get; set; }
+    public float Valeur { get; set; }
     
     // Navigation properties
     public Etudiant? Etudiant { get; set; }

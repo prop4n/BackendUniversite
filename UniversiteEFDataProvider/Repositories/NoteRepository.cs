@@ -7,7 +7,7 @@ namespace UniversiteEFDataProvider.Repositories;
 
 public class NoteRepository(UniversiteDbContext context) : Repository<Note>(context), INoteRepository
 {
-    public async Task<Note> AddNoteAsync(long etudiantId, long ueId, double valeur)
+    public async Task<Note> AddNoteAsync(long etudiantId, long ueId, float valeur)
     {
         ArgumentNullException.ThrowIfNull(Context.Notes);
         ArgumentNullException.ThrowIfNull(Context.Etudiants);

@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using UniversiteDomain.DataAdapters;
 using UniversiteDomain.Entities;
 using UniversiteEFDataProvider.Data;
@@ -19,5 +20,14 @@ public class EtudiantRepository(UniversiteDbContext context) : Repository<Etudia
     public async Task AffecterParcoursAsync(Etudiant etudiant, Parcours parcours)
     {
         await AffecterParcoursAsync(etudiant.Id, parcours.Id); 
+    }
+    
+    public async Task<Etudiant?> FindEtudiantCompletAsync(long id)
+    {
+        return await context.Etudiants
+            .Include(e => e.ParcoursSuivi)
+            .Include(e => e.NotesObtenues)
+            .ThenInclude(n => n.Ue)
+            .FirstOrDefaultAsync(e => e.Id == id);
     }
 }

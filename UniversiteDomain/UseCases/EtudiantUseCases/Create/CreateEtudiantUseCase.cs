@@ -46,4 +46,10 @@ public class CreateEtudiantUseCase(IRepositoryFactory repositoryFactory)
         // Le métier définit que les nom doit contenir plus de 3 lettres
         if (etudiant.Nom.Length < 3) throw new InvalidNomEtudiantException(etudiant.Nom +" incorrect - Le nom d'un étudiant doit contenir plus de 3 caractères");
     }
+    
+    public bool IsAuthorized(string role)
+    {
+        // Seuls la scolarité et les responsables peuvent créer des étudiants
+        return role.Equals(Roles.Scolarite) || role.Equals(Roles.Responsable);
+    }
 }
